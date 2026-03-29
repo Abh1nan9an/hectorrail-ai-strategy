@@ -87,43 +87,102 @@ export function EngagementProvider({ children }) {
       'differently': 'We see it differently',
       'tell-more': 'Tell us more'
     }
-    const data = {
-      document: 'AI-Native Strategy — Strawman Architecture',
-      exportedAt: new Date().toISOString(),
-      sectionEngagement: {
-        '01 — Position': {
-          reactions: state.position.reactions.map(r => reactionLabels[r]),
-          annotation: state.position.annotation || null
-        },
-        '02 — Strawman Architecture': {
-          reactions: state.backbone.reactions.map(r => reactionLabels[r]),
-          annotation: state.backbone.annotation || null
-        },
-        '03 — Stance': {
-          reactions: state.stance.reactions.map(r => reactionLabels[r]),
-          annotation: state.stance.annotation || null
-        },
-        '04 — Time Logic': {
-          reactions: state.timeLogic.reactions.map(r => reactionLabels[r]),
-          annotation: state.timeLogic.annotation || null
-        }
-      },
-      hypotheses: {
-        '01 — Real-time network intelligence': state.hypotheses.h1 ? hypoLabels[state.hypotheses.h1] : null,
-        '02 — Commercial decision-making': state.hypotheses.h2 ? hypoLabels[state.hypotheses.h2] : null,
-        '03 — Institutional knowledge at risk': state.hypotheses.h3 ? hypoLabels[state.hypotheses.h3] : null,
-        '04 — Decision architecture barrier': state.hypotheses.h4 ? hypoLabels[state.hypotheses.h4] : null,
-        '05 — Human boundaries matter': state.hypotheses.h5 ? hypoLabels[state.hypotheses.h5] : null,
-        annotation: state.hypotheses.annotation || null
-      },
-      closingThoughts: state.invite.annotation || null
+
+    const date = new Date().toLocaleDateString('en-GB', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    })
+
+    const renderSection = (title, reactions, annotation) => {
+      const lines = [`## ${title}\n`]
+      if (reactions.length > 0) {
+        lines.push(`**Reactions:** ${reactions.join(' · ')}\n`)
+      }
+      if (annotation && annotation.trim()) {
+        lines.push(`**Notes:**\n\n${annotation.trim()}\n`)
+      }
+      if (reactions.length === 0 && (!annotation || !annotation.trim())) {
+        lines.push(`_No engagement recorded for this section._\n`)
+      }
+      return lines.join('\n')
     }
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const hypothesisRows = [
+      { label: '01 — Real-time network intelligence', key: 'h1' },
+      { label: '02 — Commercial decision-making', key: 'h2' },
+      { label: '03 — Institutional knowledge at risk', key: 'h3' },
+      { label: '04 — Decision architecture barrier', key: 'h4' },
+      { label: '05 — Human boundaries matter', key: 'h5' },
+    ]
+
+    const md = [
+      `# AI-Native Strategy — Engagement Summary`,
+      ``,
+      `**Document:** Strawman Architecture for AI-Native Strategy`,
+      `**Exported:** ${date}`,
+      ``,
+      `---`,
+      ``,
+      `This document captures the reactions, notes, and responses recorded while reading the Tarento point of view on AI-native strategy. It is intended as a starting point for the conversation that follows.`,
+      ``,
+      `---`,
+      ``,
+      renderSection(
+        '01 — Position',
+        state.position.reactions.map(r => reactionLabels[r]),
+        state.position.annotation
+      ),
+      `---`,
+      ``,
+      renderSection(
+        '02 — Strawman Architecture',
+        state.backbone.reactions.map(r => reactionLabels[r]),
+        state.backbone.annotation
+      ),
+      `---`,
+      ``,
+      renderSection(
+        '03 — Enable / Extend / Engineer',
+        state.stance.reactions.map(r => reactionLabels[r]),
+        state.stance.annotation
+      ),
+      `---`,
+      ``,
+      renderSection(
+        '04 — Now / Next / Later',
+        state.timeLogic.reactions.map(r => reactionLabels[r]),
+        state.timeLogic.annotation
+      ),
+      `---`,
+      ``,
+      `## 05 — Hypotheses`,
+      ``,
+      ...hypothesisRows.map(({ label, key }) => {
+        const response = state.hypotheses[key]
+        return `- **${label}:** ${response ? hypoLabels[response] : '_No response_'}`
+      }),
+      ``,
+      ...(state.hypotheses.annotation && state.hypotheses.annotation.trim()
+        ? [`**Overall response:**\n\n${state.hypotheses.annotation.trim()}\n`]
+        : [`_No overall notes recorded._\n`]
+      ),
+      `---`,
+      ``,
+      `## Closing Thoughts`,
+      ``,
+      ...(state.invite.annotation && state.invite.annotation.trim()
+        ? [state.invite.annotation.trim(), ``]
+        : [`_Nothing recorded._`, ``]
+      ),
+      `---`,
+      ``,
+      `_Prepared by Tarento · [tarento.com](https://tarento.com)_`,
+    ].join('\n')
+
+    const blob = new Blob([md], { type: 'text/markdown' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'ai-native-pov-engagement.json'
+    a.download = 'ai-native-strategy-engagement.md'
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
