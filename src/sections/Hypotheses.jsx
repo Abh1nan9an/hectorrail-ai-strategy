@@ -9,27 +9,17 @@ const HYPOTHESES = [
   {
     key: 'h1',
     num: '01',
-    text: 'Real-time network intelligence could shift competitive position from \u201creliable operator\u201d to \u201cpredictive logistics partner\u201d — changing the nature of customer commitments possible, and the margins that accompany\u00a0them.'
+    text: 'Real-time network intelligence could shift Hector Rail\u2019s position from dependable freight operator to higher-value logistics decision partner — especially on cross-border and corridor traffic where predictability, visibility, and exception handling matter as much as haulage\u00a0itself.'
   },
   {
     key: 'h2',
     num: '02',
-    text: 'The highest-value AI opportunity may not be in operations — where incremental optimisation has diminishing returns — but in commercial decision-making: dynamic pricing, capacity allocation, and customer\u00a0intelligence.'
+    text: 'The highest-value AI opportunity may sit not only in rail operations, but in how Hector Rail prices, allocates, and commits scarce capacity across industrial customers, corridors, and service windows — where better decisions could improve both margin quality and customer\u00a0relevance.'
   },
   {
     key: 'h3',
     num: '03',
-    text: 'Decades of operational experience, route expertise, and regulatory understanding represent a strategic asset that is currently invisible, unstructured, and at genuine risk of being lost. That knowledge is the difference between AI that is generically capable and AI that actually knows your\u00a0business.'
-  },
-  {
-    key: 'h4',
-    num: '04',
-    text: 'The biggest barrier to becoming AI-native is not technology or data readiness. It is the current decision architecture — where decisions follow hierarchy and experience rather than the best available combination of human judgement and machine\u00a0intelligence.'
-  },
-  {
-    key: 'h5',
-    num: '05',
-    text: 'Some critical areas — safety decisions, certain regulatory processes, key customer relationships — should remain firmly human-led, regardless of what AI could technically do. Defining those boundaries with clarity is as strategically important as identifying where AI should\u00a0enter.'
+    text: 'Hector Rail\u2019s operational know-how — route expertise, disruption handling, cross-border execution knowledge, and regulatory understanding — is a strategic asset that is currently difficult to scale. The winners in rail AI may be the operators that turn this invisible expertise into usable institutional intelligence before it is lost or trapped in experience-heavy\u00a0roles.'
   },
 ]
 
@@ -84,14 +74,14 @@ export default function Hypotheses({ onEnterView }) {
       <div className={`section__inner${inView ? ' in-view' : ''}`}>
         <div className="section__number">05</div>
         <h2 className="section__heading">
-          Five working hypotheses — <em>provocations to test, not&nbsp;conclusions.</em>
+          Three working hypotheses — <em>early views for discussion, not&nbsp;conclusions.</em>
         </h2>
 
         <p className="hypotheses-intro">
-          These are our current best guesses about where the greatest opportunity and
-          greatest risk lies for Hector Rail. We hold them with confidence and open hands.
-          Tell us where we're right, where we're wrong, and where your thinking has
-          already gone&nbsp;further.
+          These are not use cases. They are directional views on where strategic advantage,
+          friction, or redesign may matter most before specific initiatives are defined.
+          We hold them with confidence and open hands — tell us where we're right, where
+          we're wrong, and where your thinking has already gone&nbsp;further.
         </p>
 
         <div className="hypothesis-list">

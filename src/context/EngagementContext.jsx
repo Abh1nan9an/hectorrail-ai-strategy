@@ -8,7 +8,7 @@ const initialState = {
   stance:    { reactions: [], annotation: '' },
   timeLogic: { reactions: [], annotation: '' },
   hypotheses: {
-    h1: null, h2: null, h3: null, h4: null, h5: null,
+    h1: null, h2: null, h3: null,
     annotation: ''
   },
   invite: { annotation: '' }
@@ -68,10 +68,10 @@ export function EngagementProvider({ children }) {
     contentSections.forEach(s => {
       if (state[s].reactions.length > 0 || state[s].annotation.trim()) engaged++
     })
-    const hyps = ['h1', 'h2', 'h3', 'h4', 'h5']
+    const hyps = ['h1', 'h2', 'h3']
     hyps.forEach(h => { if (state.hypotheses[h] !== null) engaged++ })
     if (state.hypotheses.annotation.trim()) engaged++
-    return Math.round((engaged / 11) * 100)
+    return Math.round((engaged / 9) * 100)
   }, [state])
 
   const exportEngagement = useCallback(() => {
@@ -107,11 +107,9 @@ export function EngagementProvider({ children }) {
     }
 
     const hypothesisRows = [
-      { label: '01 — Real-time network intelligence', key: 'h1' },
-      { label: '02 — Commercial decision-making', key: 'h2' },
-      { label: '03 — Institutional knowledge at risk', key: 'h3' },
-      { label: '04 — Decision architecture barrier', key: 'h4' },
-      { label: '05 — Human boundaries matter', key: 'h5' },
+      { label: '01 — Network intelligence & positioning', key: 'h1' },
+      { label: '02 — Capacity pricing & commercial decisions', key: 'h2' },
+      { label: '03 — Institutional knowledge as strategic asset', key: 'h3' },
     ]
 
     const md = [
