@@ -92,95 +92,104 @@ export function EngagementProvider({ children }) {
       day: 'numeric', month: 'long', year: 'numeric'
     })
 
+    const WIDE  = '════════════════════════════════════════════════════════'
+    const THIN  = '────────────────────────────────────────────────────────'
+    const BLANK = ''
+
     const renderSection = (title, reactions, annotation) => {
-      const lines = [`## ${title}\n`]
+      const lines = [title, THIN]
       if (reactions.length > 0) {
-        lines.push(`**Reactions:** ${reactions.join(' · ')}\n`)
+        lines.push(`Reactions:  ${reactions.join('  ·  ')}`)
+        lines.push(BLANK)
       }
       if (annotation && annotation.trim()) {
-        lines.push(`**Notes:**\n\n${annotation.trim()}\n`)
+        lines.push('Notes:')
+        lines.push(annotation.trim())
+        lines.push(BLANK)
       }
       if (reactions.length === 0 && (!annotation || !annotation.trim())) {
-        lines.push(`_No engagement recorded for this section._\n`)
+        lines.push('No engagement recorded for this section.')
+        lines.push(BLANK)
       }
       return lines.join('\n')
     }
 
     const hypothesisRows = [
-      { label: '01 — Network intelligence & positioning', key: 'h1' },
-      { label: '02 — Capacity pricing & commercial decisions', key: 'h2' },
-      { label: '03 — Institutional knowledge as strategic asset', key: 'h3' },
+      { label: '01  Network intelligence & positioning', key: 'h1' },
+      { label: '02  Capacity pricing & commercial decisions', key: 'h2' },
+      { label: '03  Institutional knowledge as strategic asset', key: 'h3' },
     ]
 
-    const md = [
-      `# AI-Native Strategy — Engagement Summary`,
-      ``,
-      `**Document:** Strawman Architecture for AI-Native Strategy`,
-      `**Exported:** ${date}`,
-      ``,
-      `---`,
-      ``,
-      `This document captures the reactions, notes, and responses recorded while reading the Tarento point of view on AI-native strategy. It is intended as a starting point for the conversation that follows.`,
-      ``,
-      `---`,
-      ``,
+    const padRight = (str, len) => str + ' '.repeat(Math.max(0, len - str.length))
+
+    const txt = [
+      'AI-NATIVE STRATEGY — ENGAGEMENT SUMMARY',
+      `Prepared by Tarento  ·  Exported ${date}`,
+      WIDE,
+      BLANK,
+      'This document captures the reactions, notes, and responses recorded while',
+      'reading the Tarento point of view on AI-native strategy. It is intended as',
+      'a starting point for the conversation that follows.',
+      BLANK,
+      WIDE,
+      BLANK,
       renderSection(
-        '01 — Position',
+        '01 — POSITION',
         state.position.reactions.map(r => reactionLabels[r]),
         state.position.annotation
       ),
-      `---`,
-      ``,
+      WIDE,
+      BLANK,
       renderSection(
-        '02 — Strawman Architecture',
+        '02 — STRAWMAN ARCHITECTURE',
         state.backbone.reactions.map(r => reactionLabels[r]),
         state.backbone.annotation
       ),
-      `---`,
-      ``,
+      WIDE,
+      BLANK,
       renderSection(
-        '03 — Enable / Extend / Engineer',
+        '03 — ENABLE / EXTEND / ENGINEER',
         state.stance.reactions.map(r => reactionLabels[r]),
         state.stance.annotation
       ),
-      `---`,
-      ``,
+      WIDE,
+      BLANK,
       renderSection(
-        '04 — Now / Next / Later',
+        '04 — NOW / NEXT / LATER',
         state.timeLogic.reactions.map(r => reactionLabels[r]),
         state.timeLogic.annotation
       ),
-      `---`,
-      ``,
-      `## 05 — Hypotheses`,
-      ``,
+      WIDE,
+      BLANK,
+      '05 — HYPOTHESES',
+      THIN,
       ...hypothesisRows.map(({ label, key }) => {
         const response = state.hypotheses[key]
-        return `- **${label}:** ${response ? hypoLabels[response] : '_No response_'}`
+        return `${padRight(label, 50)}${response ? hypoLabels[response] : '—'}`
       }),
-      ``,
+      BLANK,
       ...(state.hypotheses.annotation && state.hypotheses.annotation.trim()
-        ? [`**Overall response:**\n\n${state.hypotheses.annotation.trim()}\n`]
-        : [`_No overall notes recorded._\n`]
+        ? ['Overall response:', state.hypotheses.annotation.trim(), BLANK]
+        : ['No overall notes recorded.', BLANK]
       ),
-      `---`,
-      ``,
-      `## Closing Thoughts`,
-      ``,
+      WIDE,
+      BLANK,
+      '06 — CLOSING THOUGHTS',
+      THIN,
       ...(state.invite.annotation && state.invite.annotation.trim()
-        ? [state.invite.annotation.trim(), ``]
-        : [`_Nothing recorded._`, ``]
+        ? [state.invite.annotation.trim(), BLANK]
+        : ['Nothing recorded.', BLANK]
       ),
-      `---`,
-      ``,
-      `_Prepared by Tarento · [tarento.com](https://tarento.com)_`,
+      WIDE,
+      BLANK,
+      'Prepared by Tarento  ·  tarento.com',
     ].join('\n')
 
-    const blob = new Blob([md], { type: 'text/markdown' })
+    const blob = new Blob([txt], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'ai-native-strategy-engagement.md'
+    a.download = 'ai-native-strategy-engagement.txt'
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
