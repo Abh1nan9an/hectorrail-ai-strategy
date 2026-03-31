@@ -1,6 +1,6 @@
 # AI-Native Strategy — Strawman Architecture
 
-An interactive strategic thought canvas built for Hector Rail, presenting a point of view on what it means to become AI-native — not as a pitch, but as a provocation worth responding to.
+An interactive strategic thought canvas built for [Hector Rail](https://www.hectorrail.com), presenting a point of view on what it means to become AI-native — not as a pitch, but as a provocation worth responding to.
 
 Built by [Tarento](https://tarento.com) as a Beat 1 deliverable for the AI-Native Strategy sprint.
 
@@ -42,8 +42,8 @@ The core intellectual architecture is a **strawman** — deliberately incomplete
 | 02 — Strawman Architecture | The eight-layer architecture (expandable accordion) |
 | 03 — Stance | Enable, Extend, Engineer — three intervention types |
 | 04 — Time Logic | Now, Next, Later — sequencing logic and boundary conditions |
-| 05 — Hypotheses | Five working hypotheses specific to Hector Rail |
-| 06 — Join Forces | Closing thoughts, export, and invitation to continue |
+| 05 — Hypotheses | Three working hypotheses specific to Hector Rail |
+| 06 — Invite | Closing thoughts, export, and invitation to continue the conversation |
 
 ---
 
@@ -53,8 +53,9 @@ Every section supports:
 
 - **Reactions** — This resonates / Want to discuss / We have thoughts / High priority
 - **Annotations** — Typed or spoken (via Web Speech API)
-- **Help me respond** — A guided response panel with universal and section-specific prompts, each supporting voice capture or prompt insertion
-- **Export** — All engagement data exports as a structured JSON file
+- **Help me respond** — A guided response panel with universal and section-specific prompts, each supporting voice capture or one-click prompt insertion
+- **Export** — All engagement data exports as a structured plain-text (`.txt`) file, readable and editable in any text editor
+- **Privacy & data** — A transparent data notice (accessible from the footer) covering browser-only storage, voice input handling, and GitHub Pages hosting
 
 ---
 
@@ -64,9 +65,10 @@ Every section supports:
 - **Styling:** Vanilla CSS with custom properties (design tokens), no CSS-in-JS
 - **Icons:** Lucide React
 - **Fonts:** Montserrat + Open Sans (Google Fonts)
-- **State:** React Context (EngagementContext)
-- **Voice:** Web Speech API (Chrome-optimised)
-- **Deployment:** GitHub Pages
+- **State:** React Context (`EngagementContext`) — in-memory only, no persistence
+- **Voice:** Web Speech API (Chrome-optimised; on-device in Safari)
+- **Portals:** React `createPortal` for side panels, to escape CSS transform containment
+- **Deployment:** GitHub Pages (auto-deploy on push to `main`)
 
 ---
 
@@ -89,7 +91,7 @@ npm run build
 
 ## Brand
 
-Dual-branded: Tarento × Hector Rail.
+Dual-branded: [Tarento](https://tarento.com) × [Hector Rail](https://www.hectorrail.com).
 
 - Tarento navy `#16283C`, teal `#1E8F8E`
 - Hector Rail yellow `#FAB900`, black, white
@@ -98,4 +100,4 @@ Dual-branded: Tarento × Hector Rail.
 
 ## Status
 
-Production-ready. Presented to Hamid (Global CIO, Hector Rail) as part of the AI-Native Strategy engagement.
+Production-ready. Presented to Hamid (Global CIO, [Hector Rail](https://www.hectorrail.com)) as the opening artefact of the AI-Native Strategy engagement. Designed to be shared with the broader Hector Rail leadership team as Hamid sees fit — the engagement and export features are built precisely for that wider conversation.
