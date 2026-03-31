@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { useInView } from '../hooks'
-import { Mic, MicOff } from 'lucide-react'
+import { Mic, MicOff, Lock } from 'lucide-react'
 import { useEngagement } from '../context/EngagementContext'
+import PrivacyPanel from '../components/PrivacyPanel'
 
 export default function Invite({ onEnterView }) {
   const [ref, inView] = useInView()
   const { state, setInviteField, exportEngagement } = useEngagement()
   const [isRecording, setIsRecording] = useState(false)
+  const [privacyOpen, setPrivacyOpen] = useState(false)
   const recognitionRef = useRef(null)
 
   useEffect(() => {
@@ -123,6 +125,19 @@ export default function Invite({ onEnterView }) {
             </div>
           </div>
         </div>
+
+        <div className="invite-privacy-link">
+          <button
+            className="privacy-trigger"
+            onClick={() => setPrivacyOpen(true)}
+            aria-label="Open privacy and data information"
+          >
+            <Lock size={11} strokeWidth={1.5} />
+            <span>Privacy &amp; data</span>
+          </button>
+        </div>
+
+        <PrivacyPanel open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
       </div>
     </section>
   )

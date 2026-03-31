@@ -1502,6 +1502,88 @@ a { color: var(--tar-teal); text-decoration: none; }
   letter-spacing: -0.01em;
 }
 
+/* ─── Privacy trigger link ───────────────────────────────────────────── */
+.invite-privacy-link {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.privacy-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--body-font);
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.privacy-trigger:hover {
+  color: var(--text-muted);
+}
+
+/* ─── Privacy Panel (reuses .response-aid shell) ─────────────────────── */
+.privacy-panel.response-aid {
+  width: 460px;
+}
+
+.privacy-panel__body {
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px 40px;
+  gap: 0;
+}
+
+.privacy-panel__section {
+  display: flex;
+  gap: 20px;
+  padding: 28px 0;
+}
+
+.privacy-panel__divider {
+  height: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.privacy-panel__icon {
+  color: var(--accent-teal);
+  flex-shrink: 0;
+  padding-top: 2px;
+  width: 20px;
+}
+
+.privacy-panel__content {
+  flex: 1;
+}
+
+.privacy-panel__heading {
+  font-family: var(--heading-font);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.privacy-panel__text {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.privacy-panel__text:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Animations ─────────────────────────────────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
