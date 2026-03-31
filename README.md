@@ -4,7 +4,7 @@ An interactive strategic thought canvas built for [Hector Rail](https://www.hect
 
 Built by [Tarento](https://tarento.com) as a Beat 1 deliverable for the AI-Native Strategy sprint.
 
-https://hectorrail-ai-strategy.tarentoinitiatives.com/ 
+**Live site → https://hectorrail-ai-strategy.tarentoinitiatives.com/**
 
 ---
 
