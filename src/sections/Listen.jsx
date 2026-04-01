@@ -38,10 +38,15 @@ export default function Listen({ onEnterView }) {
     setCurrentTime(audioRef.current?.currentTime ?? 0)
   }, [])
 
-  const handleCanPlay = useCallback(() => {
+  // Safari fires loadedmetadata reliably; Chrome/Firefox fire canplay.
+  // Listen to both so the player unlocks on whichever arrives first.
+  const handleReady = useCallback(() => {
+    const dur = audioRef.current?.duration
+    if (dur && isFinite(dur)) setDuration(dur)
     setLoaded(true)
-    setDuration(audioRef.current?.duration ?? null)
   }, [])
+
+  const handleCanPlay = handleReady
 
   const handleEnded = useCallback(() => {
     setPlaying(false)
@@ -88,8 +93,9 @@ export default function Listen({ onEnterView }) {
             ref={audioRef}
             src={AUDIO_SRC}
             preload="metadata"
-            onTimeUpdate={handleTimeUpdate}
+            onLoadedMetadata={handleReady}
             onCanPlay={handleCanPlay}
+            onTimeUpdate={handleTimeUpdate}
             onPlay={() => setPlaying(true)}
             onPause={() => setPlaying(false)}
             onEnded={handleEnded}
