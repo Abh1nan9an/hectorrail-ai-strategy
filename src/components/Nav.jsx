@@ -7,7 +7,8 @@ const SECTIONS = [
   { id: 'stance',     label: 'Stance', num: '03' },
   { id: 'timeLogic',  label: 'Time Logic', num: '04' },
   { id: 'hypotheses', label: 'Hypotheses', num: '05' },
-  { id: 'invite',     label: 'Join Forces', num: '06' },
+  { id: 'listen',     label: 'Listen', num: '06' },
+  { id: 'invite',     label: 'Join Forces', num: '07' },
 ]
 
 export default function Nav({ activeSection }) {

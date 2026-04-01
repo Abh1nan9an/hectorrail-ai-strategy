@@ -8,9 +8,10 @@ import Backbone from './sections/Backbone'
 import Stance from './sections/Stance'
 import TimeLogic from './sections/TimeLogic'
 import Hypotheses from './sections/Hypotheses'
+import Listen from './sections/Listen'
 import Invite from './sections/Invite'
 
-const SECTION_IDS = ['cover', 'position', 'backbone', 'stance', 'timeLogic', 'hypotheses', 'invite']
+const SECTION_IDS = ['cover', 'position', 'backbone', 'stance', 'timeLogic', 'hypotheses', 'listen', 'invite']
 
 function AppContent() {
   const [activeSection, setActiveSection] = useState('cover')
@@ -60,6 +61,7 @@ function AppContent() {
         <Stance     onEnterView={handleEnterView} />
         <TimeLogic  onEnterView={handleEnterView} />
         <Hypotheses onEnterView={handleEnterView} />
+        <Listen     onEnterView={handleEnterView} />
         <Invite     onEnterView={handleEnterView} />
       </main>
     </>

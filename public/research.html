@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Report — AI-Native Strategy</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #16283C;
+      --teal:  #1E8F8E;
+      --text:  #E8EDF2;
+      --text2: #9FB3C8;
+      --text3: #6B849A;
+      --bg:    #0D1B2A;
+      --bg2:   #122030;
+      --bg3:   #1A2D40;
+      --border:#2A3E52;
+      --yellow:#FAB900;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      padding: 0;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .top-bar__label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .top-bar__back {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .top-bar__back:hover { color: var(--text2); }
+
+    /* ── Content ── */
+    #content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 40px 120px;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 120px 40px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Markdown typography ── */
+    #content h1 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    #content h2 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-top: 56px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #content h3 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(16px, 2vw, 19px);
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 36px;
+      margin-bottom: 12px;
+    }
+
+    #content h4 {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+
+    #content p {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--text2);
+      margin-bottom: 20px;
+    }
+
+    #content strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    #content em { color: var(--text2); }
+
+    #content a {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    #content a:hover { color: #26b5b4; }
+
+    #content ul, #content ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    #content li {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--text2);
+      margin-bottom: 8px;
+      line-height: 1.75;
+    }
+
+    #content blockquote {
+      border-left: 3px solid var(--teal);
+      margin: 32px 0;
+      padding: 16px 24px;
+      background: var(--bg3);
+      border-radius: 0 8px 8px 0;
+    }
+
+    #content blockquote p {
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 0;
+    }
+
+    #content code {
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 13px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      color: var(--yellow);
+    }
+
+    #content pre {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+
+    #content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    #content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
+
+    #content th {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    #content td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    #content tr:last-child td { border-bottom: none; }
+
+    #content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    #error {
+      display: none;
+      text-align: center;
+      padding: 80px 40px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text3);
+    }
+
+    #error p { font-size: 15px; line-height: 1.7; }
+    #error strong { color: var(--text2); }
+
+    @media (max-width: 640px) {
+      .top-bar { padding: 12px 20px; }
+      #content { padding: 40px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span class="top-bar__label">Research Report — AI-Native Strategy</span>
+    <a class="top-bar__back" href="javascript:window.close()">
+      ← Close
+    </a>
+  </div>
+
+  <div id="loading">Loading report…</div>
+  <div id="error">
+    <p><strong>Research report not found.</strong><br />
+    Place <code>Hector-Rail-AIStrategy-DeepResearch-ByTarento.md</code> in the <code>public/</code> folder and reload.</p>
+  </div>
+  <div id="content" style="display:none"></div>
+
+  <script>
+    fetch('./Hector-Rail-AIStrategy-DeepResearch-ByTarento.md')
+      .then(r => {
+        if (!r.ok) throw new Error('not found')
+        return r.text()
+      })
+      .then(text => {
+        document.getElementById('loading').style.display = 'none'
+        // Strip AI citation/entity markers from deep research output.
+        // Exact structure from hex inspection:
+        //   U+E200 opens block → U+E202 separates refs → U+E201 closes block
+        // Pattern: match from opener (E200) to closer (E201), inclusive.
+        const clean = text
+          .replace(/\uE200[^\uE200\uE201]*\uE201/g, '')
+          // Catch any residual private-use area or C1 control characters
+          .replace(/[\u0080-\u009F\uE000-\uF8FF]/g, '')
+        const el = document.getElementById('content')
+        el.innerHTML = marked.parse(clean)
+        el.style.display = 'block'
+        // Set page title from first h1 if present
+        const h1 = el.querySelector('h1')
+        if (h1) document.title = h1.textContent + ' — Research'
+      })
+      .catch(() => {
+        document.getElementById('loading').style.display = 'none'
+        document.getElementById('error').style.display = 'block'
+      })
+  </script>
+</body>
+</html>

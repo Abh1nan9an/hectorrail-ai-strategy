@@ -11,6 +11,7 @@
   --hr-yellow-border: rgba(250, 185, 0, 0.35);
   --tar-navy:      #16283C;
   --tar-teal:      #1E8F8E;
+  --accent-teal:   #1E8F8E;
   --tar-teal-dim:  rgba(30, 143, 142, 0.12);
   --text:          #16283C;
   --text-secondary:#3D5068;
@@ -1502,6 +1503,150 @@ a { color: var(--tar-teal); text-decoration: none; }
   letter-spacing: -0.01em;
 }
 
+/* ─── Listen Section ─────────────────────────────────────────────────── */
+.listen-intro {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.listen-intro p {
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.listen-intro p:last-child { margin-bottom: 0; }
+
+.audio-player {
+  max-width: 640px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-teal);
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+
+.audio-player__controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.audio-player__play-btn {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.audio-player__play-btn:hover:not(:disabled) {
+  background: var(--tar-teal);
+  transform: scale(1.05);
+}
+
+.audio-player__play-btn:disabled,
+.audio-player__play-btn.loading {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Nudge play icon slightly right to optically centre it */
+.audio-player__play-btn svg {
+  transform: translateX(1px);
+}
+
+.audio-player__track {
+  flex: 1;
+}
+
+.audio-player__progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--accent-teal) var(--progress, 0%),
+    var(--border-strong) var(--progress, 0%)
+  );
+  outline: none;
+  cursor: pointer;
+  transition: height 0.15s ease;
+}
+
+.audio-player__progress:hover {
+  height: 6px;
+}
+
+.audio-player__progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.audio-player__progress::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+.audio-player__progress::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  border: none;
+  cursor: pointer;
+}
+
+.audio-player__progress:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.audio-player__time {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  min-width: 88px;
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Research report link ───────────────────────────────────────────── */
+.listen-research-link {
+  max-width: 640px;
+}
+
+.research-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s ease;
+}
+
+.research-link:hover {
+  color: var(--accent-teal);
+}
+
 /* ─── Privacy trigger link ───────────────────────────────────────────── */
 .invite-privacy-link {
   margin-top: 24px;
@@ -1624,6 +1769,12 @@ a { color: var(--tar-teal); text-decoration: none; }
 @media (max-width: 900px) {
   .side-nav { display: none; }
   .site-header { padding: 16px 24px; }
+}
+
+@media (max-width: 640px) {
+  .site-header { padding: 12px 16px; }
+  .site-header__logo--tarento img { height: 36px; }
+  .site-header__logo--hector img  { height: 22px; }
 }
 
 @media (max-width: 640px) {

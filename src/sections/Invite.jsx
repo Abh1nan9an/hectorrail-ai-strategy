@@ -48,7 +48,7 @@ export default function Invite({ onEnterView }) {
   return (
     <section id="invite" className="section" ref={ref}>
       <div className={`section__inner${inView ? ' in-view' : ''}`}>
-        <div className="section__number">06</div>
+        <div className="section__number">07</div>
         <h2 className="section__heading">
           We've started thinking — <em>your turn to help us sharpen&nbsp;this.</em>
         </h2>
